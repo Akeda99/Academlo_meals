@@ -2,6 +2,8 @@ const AppError = require('../utils/appError');
 const catchAsync = require('../utils/catchAsync');
 const bcrypt = require('bcryptjs');
 const Order = require('../models/order.model');
+const Restaurant = require('../models/restaurant.model');
+const Meal = require('../models/meal.model');
 
 /* Updating the user. */
 exports.updateUser = catchAsync(async (req, res, next) => {
@@ -62,15 +64,15 @@ exports.getOrders = catchAsync(async (req, res, next) => {
     },
     include: [
       {
-        model: Cart,
+        model: Meal,
         where: {
-          status: 'purchased',
+          status: 'true',
         },
         include: [
           {
-            model: ProductInCart,
+            model: Restaurant,
             where: {
-              status: 'purchased',
+              status: 'true',
             },
           },
         ],
@@ -96,15 +98,17 @@ exports.getOrder = catchAsync(async (req, res, next) => {
     },
     include: [
       {
-        model: Cart,
+        model: Meal,
+        attributes: { include: ['name'] },
         where: {
-          status: 'purchased',
+          status: 'true',
         },
         include: [
           {
-            model: ProductInCart,
+            model: Restaurant,
+            attributes: { include: ['name'] },
             where: {
-              status: 'purchased',
+              status: 'true',
             },
           },
         ],

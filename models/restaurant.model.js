@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 const { db } = require('../database/db');
 
-const Order = db.define('order', {
+const Restaurant = db.define('restaurant', {
     id: {
         primaryKey: true,
         autoIncrement: true,
@@ -28,4 +28,4 @@ const Order = db.define('order', {
     }
 })
 
-module.exports = Order
+module.exports = Restaurant
