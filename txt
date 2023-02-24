@@ -1,0 +1,8 @@
+// lo de orders tenemos que hacerlo con model 1M 1
+// Falta poner el post signup y Login en users.routes pero creo que eso tenemos que ponerlo en Auth, tenemos que el borrar el post de ausers.routes.js
+// Falta crear el model de orders y restaurants
+//Falta completar middlewares, controllers,routes.
+// En cuanto a utils lo que falta lo haremos mucho despues falta firebase y multer
+//Falta crear tabien las relaciones
+
+haremos primero tood lo de User ya que con eso haremos tambien lo de Auth
