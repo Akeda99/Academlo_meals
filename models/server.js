@@ -7,6 +7,7 @@ const AppError = require('../utils/appError');
 const morgan = require('morgan');
 const { authRouter } = require('../routes/auth.routes');
 const initModel = require('./init.model');
+const { mealsRouter } = require('../routes/meals.routes');
 
 class Server{
 constructor(){
@@ -37,7 +38,7 @@ middlewares(){
 routes(){
     this.app.use(this.paths.users, usersRouter);
     this.app.use(this.paths.auth, authRouter);
-    // this.app.use(this.paths.repairs, repairsRouter);
+    this.app.use(this.paths.meals, mealsRouter);
     this.app.all('*', (req, res, next) => {
     return next(
         new AppError(`Can't find ${req.originalUrl} on this server!`, 404)

@@ -23,14 +23,14 @@ exports.updateProductValidation = [
 ];
 
 exports.updateUserValidation = [
-  check('username', 'The username must be mandatory').not().isEmpty(),
+  check('name', 'The name must be mandatory').not().isEmpty(),
   check('email', 'The email must be mandatory').not().isEmpty(),
   check('email', 'The email must be a correct format').isEmail(),
 ];
 
 
 exports.addProductToCartValidation = [
-  check('productId', 'The producId is required').not().isEmpty(),
+  check('mealId', 'The producId is required').not().isEmpty(),
   check('productId', 'The producId must be a number').isNumeric(),
   check('quantity', 'The quantity is required').not().isEmpty(),
   check('quantity', 'The quantity must be a number').isNumeric(),
@@ -54,4 +54,17 @@ exports.loginUserValidation = [
   check('email', 'The email must be mandatory').not().isEmpty(),
   check('email', 'The email must be a correct format').isEmail(),
   check('password', 'The password must be mandatory').not().isEmpty(),
+];
+
+exports.orderPostValidation=[
+  check('mealId', 'The mealId is required').not().isEmpty(),
+  check('mealId', 'The mealId must be a number').isNumeric(),
+  check('quantity', 'The quantity is required').not().isEmpty(),
+  check('quantity', 'The quantity must be a number').isNumeric(),
+];
+
+exports.MealPostValidation=[
+  check('price', 'The price is required').not().isEmpty(),
+  check('price', 'The price must be a number').isNumeric(),
+  check('name', 'The name is required').not().isEmpty(),
 ];

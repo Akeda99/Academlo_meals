@@ -1,4 +1,1 @@
-//Falta completar middlewares, controllers,routes.
-// En cuanto a utils lo que falta lo haremos mucho despues falta firebase y multer
-
-
+//falta hacer routes, middlewares, controller de restaurant y ya con eso podriamos hacer que todo lo demas funcione

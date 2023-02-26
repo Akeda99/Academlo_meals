@@ -7,10 +7,10 @@ const Meal = require('../models/meal.model');
 
 /* Updating the user. */
 exports.updateUser = catchAsync(async (req, res, next) => {
-  const { username, email } = req.body;
+  const { name, email, role } = req.body;
   const { user } = req;
 
-  await user.update({ username, email });
+  await user.update({ name, email, role });
 
   res.status(200).json({
     status: 'success',
@@ -66,13 +66,13 @@ exports.getOrders = catchAsync(async (req, res, next) => {
       {
         model: Meal,
         where: {
-          status: 'true',
+          status: 'active',
         },
         include: [
           {
             model: Restaurant,
             where: {
-              status: 'true',
+              status: 'active',
             },
           },
         ],
@@ -101,14 +101,14 @@ exports.getOrder = catchAsync(async (req, res, next) => {
         model: Meal,
         attributes: { include: ['name'] },
         where: {
-          status: 'true',
+          status: 'active',
         },
         include: [
           {
             model: Restaurant,
             attributes: { include: ['name'] },
             where: {
-              status: 'true',
+              status: 'active',
             },
           },
         ],

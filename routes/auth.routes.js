@@ -18,7 +18,6 @@ const router = Router();
 router.post(
   '/signup',
   [
-    // upload.single('profileImageUrl'),
     registerUserValidation,
     validateFields,
     validIfExistUserEmail,
@@ -28,9 +27,9 @@ router.post(
 
 router.post('/login', loginUserValidation, validateFields, login);
 
-router.use(protect);
 
-router.get('/renew', renewToken);
+
+// router.get('/renew', renewToken);
 
 module.exports = {
   authRouter: router,

@@ -23,7 +23,8 @@ const Restaurant = db.define('restaurant', {
     status: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
-        defaultValue: true,
+        defaultValue: 'active',
+        enum: ['active', 'no active']
 
     }
 })

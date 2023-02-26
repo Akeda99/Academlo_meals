@@ -13,7 +13,7 @@ const Meal = db.define('meal', {
         allowNull: false
     },
     price: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.DECIMAL(10,2),
         allowNull: false
     },
     restaurantId: {
@@ -21,9 +21,10 @@ const Meal = db.define('meal', {
         allowNull: false
     },
     status: {
-        type: DataTypes.BOOLEAN,
+        type: DataTypes.STRING,
         allowNull: false,
-        defaultValue: true
+        defaultValue: 'active',
+        enum: ['active', 'no active']
     }
 })
 
