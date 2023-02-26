@@ -22,7 +22,14 @@ const Review = db.define('review', {
     },
     rating: {
         type: DataTypes.INTEGER,
+        defaultValue: 5,
+        enum: [1,2,3,4,5]
+    },
+    status: {
+        type: DataTypes.STRING,
         allowNull: false,
+        defaultValue: 'active',
+        enum: ['active', 'deleted']
     },
 })
 

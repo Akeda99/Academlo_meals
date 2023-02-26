@@ -10,7 +10,7 @@ exports.validRestaurantById = catchAsync(async (req, res, next) => {
   const restaurant = await Restaurant.findOne({
     where: {
       id,
-      status: true,
+      status: 'active',
     },
   });
 

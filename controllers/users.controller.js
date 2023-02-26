@@ -60,7 +60,6 @@ exports.getOrders = catchAsync(async (req, res, next) => {
   const orders = await Order.findAll({
     where: {
       userId: sessionUser.id,
-      status: true,
     },
     include: [
       {
@@ -94,7 +93,6 @@ exports.getOrder = catchAsync(async (req, res, next) => {
     where: {
       userId: sessionUser.id,
       id,
-      status: true,
     },
     include: [
       {

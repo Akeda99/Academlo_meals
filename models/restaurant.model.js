@@ -18,10 +18,12 @@ const Restaurant = db.define('restaurant', {
     },
     rating: {
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: false,
+        defaultValue: 5,
+        enum: [1,2,3,4,5]
     },
     status: {
-        type: DataTypes.BOOLEAN,
+        type: DataTypes.STRING,
         allowNull: false,
         defaultValue: 'active',
         enum: ['active', 'no active']

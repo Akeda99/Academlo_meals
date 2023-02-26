@@ -8,6 +8,8 @@ const morgan = require('morgan');
 const { authRouter } = require('../routes/auth.routes');
 const initModel = require('./init.model');
 const { mealsRouter } = require('../routes/meals.routes');
+const { ordersRouter } = require('../routes/orders.routes');
+const { restaurantsRouter } = require('../routes/restaurant.routes');
 
 class Server{
 constructor(){
@@ -39,6 +41,8 @@ routes(){
     this.app.use(this.paths.users, usersRouter);
     this.app.use(this.paths.auth, authRouter);
     this.app.use(this.paths.meals, mealsRouter);
+    this.app.use(this.paths.orders, ordersRouter);
+    this.app.use(this.paths.restaurants, restaurantsRouter);
     this.app.all('*', (req, res, next) => {
     return next(
         new AppError(`Can't find ${req.originalUrl} on this server!`, 404)

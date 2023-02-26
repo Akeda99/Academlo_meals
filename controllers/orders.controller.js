@@ -7,17 +7,28 @@ const catchAsync = require('../utils/catchAsync');
 
 /* Creating a order. */
 exports.createOrder = catchAsync(async (req, res, next) => {
-
+  const {sessionUser} = req;
   const { quantity, mealId } = req.body;
 
-  const {meal=mealId}= req; 
-  if(!meal){
-    return next(new AppError('Meal not found'), 401)
+  const meal = await Meal.findOne({
+    where: {
+      id: mealId,
+      status: 'active',
+    },
+  });
+
+  if (!meal) {
+    return next(new AppError('Meal not found', 404));
   }
 
   totalPrice= meal.price * quantity;
 
-  const order = await Order.create({ quantity, mealId, totalPrice });
+  const order = await Order.create({ 
+    quantity, 
+    mealId, 
+    totalPrice,
+    userId: sessionUser.id,
+  });
 
   res.status(201).json({
     status: 'success',
@@ -31,27 +42,28 @@ exports.findOrders = catchAsync(async (req, res, next) => {
 
   const { sessionUser } = req;
   const orders = await Order.findAll({
-    attributes: ['id', 'mealId', 'quantity', 'totalPrice'],
+    attributes: {exclude: ['createdAt','updatedAt']},
     where: {
       userId: sessionUser.id,
-      status: true,
+      status: 'active',
     },
     include: [
       {
         model: Meal,
-      },
-      include[
+        attributes: {exclude: ['createdAt','updatedAt']},
+      include: [
         {
-
           model: Restaurant,
-        }
-      ]
-    ]
+          attributes: {exclude: ['createdAt','updatedAt']},
+        },
+      ],
+    },
+  ],
   });
 
   res.status(200).json({
     status: 'success',
-    message: 'Categories fetched successfully',
+    message: 'Orders found successfully',
     orders,
   });
 });
@@ -61,10 +73,6 @@ exports.findOrders = catchAsync(async (req, res, next) => {
 exports.updateOrder = catchAsync(async (req, res, next) => {
 
   const { order } = req;
-  
-  if (order.status!=='active') {
-    return next(new AppError('Order not found', 404));
-  }
 
   await order.update({ status:'completed' });
 
@@ -75,12 +83,8 @@ exports.updateOrder = catchAsync(async (req, res, next) => {
 });
 
 /* Deleting the order. */
-exports.deleteCategory = catchAsync(async (req, res, next) => {
+exports.deleteOrder = catchAsync(async (req, res, next) => {
   const { order } = req;
-
-  if (order.status!=='active') {
-    return next(new AppError('Order not found', 404));
-  }
 
   await order.update({ status:'cancelled'});
 

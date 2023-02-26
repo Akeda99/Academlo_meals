@@ -11,7 +11,7 @@ exports.validReviewById = catchAsync(async (req, res, next) => {
   const review = await Review.findOne({
     where: {
       id,
-      status: true,
+      status: 'active',
     },
   });
 

@@ -68,3 +68,11 @@ exports.MealPostValidation=[
   check('price', 'The price must be a number').isNumeric(),
   check('name', 'The name is required').not().isEmpty(),
 ];
+
+exports.RestaurantPostValidation=[
+  check('name', 'The name is required').not().isEmpty(),
+  check('address', 'The address is required').not().isEmpty(),
+  check('rating', 'The rating is required').not().isEmpty(),
+  check('rating', 'The rating must be a number  must be a number between 1 and 5').isNumeric(),
+  check('rating', 'The rating must be a number between 1 and 5').isInt({min: 1, max:5}),
+]

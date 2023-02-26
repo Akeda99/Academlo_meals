@@ -1,5 +1,6 @@
 const Meal = require("../models/meal.model");
 const Restaurant = require("../models/restaurant.model");
+const AppError = require("../utils/appError");
 const catchAsync = require("../utils/catchAsync");
 
 exports.getMeals = catchAsync(async (req, res, next) => {
@@ -73,6 +74,7 @@ exports.updateMeal = catchAsync(async (req, res, next) => {
         name: name.toLowerCase(),
         price,
     });
+
     res.status(200).json({
         status: 'success',
         message: 'The meal was updated successfully',
@@ -89,7 +91,6 @@ exports.deleteMeal = catchAsync(async (req, res, next) => {
     res.status(200).json({
         status: 'success',
         message: 'The meal was deleted successfully',
-        updatedMeal,
     })
 });
 
